@@ -37,6 +37,7 @@
  * only if the new code is made subject to such option by the copyright
  * holder.
  */
+// Portions Copyright 2022 Payara Foundation and/or its affiliates
 
 package org.glassfish.soteria.servlet;
 
@@ -121,7 +122,7 @@ public class SamRegistrationInstaller implements ServletContainerInitializer, Se
             }
             
             registerServerAuthModule(new HttpBridgeServerAuthModule(cdiPerRequestInitializer), ctx);
-          
+
             // Add a listener so we can process the context destroyed event, which is needed
             // to de-register the SAM correctly.
             ctx.addListener(this);

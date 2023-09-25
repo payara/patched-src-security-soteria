@@ -47,7 +47,7 @@
     <parent>
        <groupId>org.glassfish.soteria</groupId>
        <artifactId>parent</artifactId>
-       <version>1.1-b01-SNAPSHOT</version>
+       <version>1.1-b01.payara-p6</version>
     </parent>
 
     <groupId>org.glassfish.soteria.test</groupId>
@@ -156,7 +156,29 @@
                     </systemPropertyVariables>
                 </configuration>
             </plugin>
+
         </plugins>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-javadoc-plugin</artifactId>
+                    <executions>
+                        <execution>
+                            <id>attach-javadocs</id>
+                            <phase>none</phase>
+                        </execution>
+                    </executions>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-deploy-plugin</artifactId>
+                    <configuration>
+                        <skip>true</skip>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
     </build>
 
     <profiles>
@@ -170,8 +192,8 @@
             <id>provided</id>
             <dependencies>
                 <dependency>
-                   <groupId>javax.security.enterprise</groupId>
-                   <artifactId>javax.security.enterprise-api</artifactId>
+                   <groupId>jakarta.security.enterprise</groupId>
+                   <artifactId>jakarta.security.enterprise-api</artifactId>
                    <version>${api_dependency_version}</version>
                    <scope>provided</scope>
                 </dependency>
@@ -194,7 +216,7 @@
                 <dependency>
                     <groupId>org.glassfish.soteria</groupId>
                     <artifactId>javax.security.enterprise</artifactId>
-                    <version>1.1-b01-SNAPSHOT</version>
+                    <version>1.1-b01.payara-p6</version>
                 </dependency>
             </dependencies>
         </profile> 
@@ -364,8 +386,8 @@
             <dependencies>
                 <dependency>
                     <groupId>fish.payara.arquillian</groupId>
-                    <artifactId>arquillian-payara-server-4-managed</artifactId> 
-                    <version>1.0.Beta2</version> 
+                    <artifactId>arquillian-payara-server-remote</artifactId>
+                    <version>2.5</version>
                     <scope>test</scope>
                 </dependency>
             </dependencies>
