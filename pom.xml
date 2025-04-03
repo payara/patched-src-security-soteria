@@ -29,7 +29,7 @@
 
     <groupId>org.glassfish.soteria</groupId>
     <artifactId>parent</artifactId>
-    <version>3.0.3.payara-p1</version>
+    <version>3.0.3.payara-p2</version>
     <packaging>pom</packaging>
 
     <description>Compatible Implementation for Jakarta Security API</description>
@@ -155,7 +155,7 @@
         <dependency>
             <groupId>com.nimbusds</groupId>
             <artifactId>nimbus-jose-jwt</artifactId>
-            <version>9.31</version>
+            <version>10.0.2</version>
         </dependency>
 
         <dependency>
