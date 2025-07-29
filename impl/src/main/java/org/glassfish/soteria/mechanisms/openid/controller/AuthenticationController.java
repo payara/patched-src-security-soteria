@@ -29,6 +29,7 @@ import static jakarta.security.enterprise.authentication.mechanism.http.openid.O
 import static jakarta.security.enterprise.authentication.mechanism.http.openid.OpenIdConstant.SCOPE;
 import static java.util.logging.Level.FINEST;
 import static org.glassfish.soteria.Utils.isEmpty;
+import static org.glassfish.soteria.cdi.AnnotationELPProcessor.evalELExpression;
 import static org.glassfish.soteria.mechanisms.OpenIdAuthenticationMechanism.ORIGINAL_REQUEST_DATA_JSON;
 
 import java.io.IOException;
@@ -122,8 +123,25 @@ public class AuthenticationController {
             authRequest.queryParam(PROMPT, configuration.getPrompt());
         }
 
-        configuration.getExtraParameters().forEach(authRequest::queryParam);
+        if(!isEmpty(configuration.getExtraParametersExpression())){
 
+            String evaluatedExtraParametersExpression = evalELExpression(configuration.getExtraParametersExpression());            
+
+            String[] extraParameters = evaluatedExtraParametersExpression.split(",");
+
+            for (String extraParameter : extraParameters) {
+                String[] keyValue = extraParameter.split("=");
+                if (keyValue.length == 2) {
+                    authRequest.queryParam(keyValue[0].trim(), keyValue[1].trim());
+                } else {
+                    LOGGER.warning("Invalid extra parameter format: " + extraParameter);
+                }
+            }
+
+        }else{
+            configuration.getExtraParameters().forEach(authRequest::queryParam);
+        }
+    
         String authUrl = authRequest.build().toString();
         LOGGER.log(FINEST, "Redirecting for authentication to {0}", authUrl);
         try {

@@ -211,6 +211,8 @@ public class ConfigurationController implements Serializable {
                 .collect(joining(SPACE_SEPARATOR));
         prompt = evalImmediate(definition.promptExpression(), prompt);
 
+        String extraParametersExpression = definition.extraParametersExpression();
+
         Map<String, String> extraParameters = new HashMap<>();
         for (String extraParameter : definition.extraParameters()) {
             String[] parts = extraParameter.split("=");
@@ -268,6 +270,7 @@ public class ConfigurationController implements Serializable {
                 .setScopes(scopes)
                 .setResponseType(responseType)
                 .setResponseMode(responseMode)
+                .setExtraParametersExpression(extraParametersExpression)
                 .setExtraParameters(extraParameters)
                 .setPrompt(prompt)
                 .setDisplay(display)
