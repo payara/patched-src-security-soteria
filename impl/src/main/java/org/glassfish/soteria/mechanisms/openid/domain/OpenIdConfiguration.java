@@ -40,6 +40,7 @@ public class OpenIdConfiguration {
     private String responseType;
     private String responseMode;
     private Map<String, String> extraParameters;
+    private String extraParametersExpression;
     private String prompt;
     private String display;
     private boolean useNonce;
@@ -132,6 +133,15 @@ public class OpenIdConfiguration {
 
     public OpenIdConfiguration setExtraParameters(Map<String, String> extraParameters) {
         this.extraParameters = extraParameters;
+        return this;
+    }
+
+    public String getExtraParametersExpression() {
+        return extraParametersExpression;
+    }
+
+    public OpenIdConfiguration setExtraParametersExpression(String extraParametersExpression) {
+        this.extraParametersExpression = extraParametersExpression;
         return this;
     }
 
@@ -245,6 +255,7 @@ public class OpenIdConfiguration {
                 + ", responseType=" + responseType
                 + ", responseMode=" + responseMode
                 + ", extraParameters=" + extraParameters
+                + ", extraParametersExpression=" + extraParametersExpression
                 + ", prompt=" + prompt
                 + ", display=" + display
                 + ", useNonce=" + useNonce
